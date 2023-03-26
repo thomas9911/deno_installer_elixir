@@ -3,7 +3,7 @@ FROM hexpm/elixir:1.14.2-erlang-24.3.4.10-ubuntu-jammy-20230126
 # RUN zypper ar http://download.opensuse.org/update/11.1/ update
 RUN apt update && apt install -y curl unzip
 
-ADD ../ /app
+ADD ./ /app
 WORKDIR /app
 
 RUN mix local.hex --force

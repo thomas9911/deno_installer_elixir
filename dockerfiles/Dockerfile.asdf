@@ -1,0 +1,19 @@
+FROM hexpm/elixir:1.14.2-erlang-24.3.4.10-ubuntu-jammy-20230126
+
+RUN apt update && apt install -y curl unzip git
+RUN git clone https://github.com/asdf-vm/asdf.git /root/.asdf --branch v0.11.3
+RUN echo 'source "/root/.asdf/asdf.sh"' >> ~/.bashrc
+RUN chmod +x ~/.bashrc
+
+ADD ../ /app
+WORKDIR /app
+
+RUN echo 'deno 1.32.1' > .tool-versions
+
+RUN mix local.hex --force
+RUN mix local.rebar --force
+RUN mix deps.get
+
+SHELL ["/bin/bash", "-c"]
+
+CMD ["./test/asdf.sh"]

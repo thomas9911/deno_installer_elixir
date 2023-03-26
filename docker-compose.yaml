@@ -1,0 +1,14 @@
+version: "3.8"
+services:
+  ubuntu:
+    build:
+      context: "."
+      dockerfile: "dockerfiles/Dockerfile.ubuntu"
+  asdf:
+    build:
+      context: "."
+      dockerfile: "dockerfiles/Dockerfile.asdf"
+  alpine:
+    build:
+      context: "."
+      dockerfile: "dockerfiles/Dockerfile.alpine"

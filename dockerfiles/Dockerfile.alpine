@@ -1,0 +1,12 @@
+FROM hexpm/elixir:1.14.2-erlang-24.3.4.10-alpine-3.17.2
+
+RUN apk add curl unzip
+
+ADD ../ /app
+WORKDIR /app
+
+RUN mix local.hex --force
+RUN mix local.rebar --force
+RUN mix deps.get
+
+CMD ["mix", "test"]

@@ -7,6 +7,16 @@ on:
     branches: ["main"]
 
 jobs:
+  build-windows:
+    runs-on: windows-2022
+    steps:
+      - uses: actions/checkout@v3
+      - uses: erlef/setup-beam@v1
+        with:
+          otp-version: '25.3'
+          elixir-version: '1.14.3'
+      - run: mix deps.get
+      - run: mix test
   build:
     runs-on: ubuntu-latest
     strategy:

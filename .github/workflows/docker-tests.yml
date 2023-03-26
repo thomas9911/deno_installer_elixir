@@ -2,14 +2,20 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        test_env:
+          - asdf
+          - alpine
+          - ubuntu
     steps:
-    - uses: actions/checkout@v3
-    - name: Run tests in docker-compose
-      run: docker-compose up --build --no-log-prefix
+      - uses: actions/checkout@v3
+      - name: Run tests in docker-compose
+        run: docker-compose up --build --no-log-prefix ${{ matrix.test_env }}
